@@ -12,7 +12,7 @@
 CFLAGS += -Wall -g
 
 %:
-	dh $@ --with autotools_dev --with yang
+	dh $@ --with yang
 
 override_dh_auto_configure:
 	chmod +x autogen.sh

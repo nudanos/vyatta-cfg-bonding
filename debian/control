@@ -1,16 +1,24 @@
 Source: vyatta-interfaces-bonding
-Section: contrib/net
-Priority: extra
-Maintainer: Vyatta Package Maintainers <DL-vyatta-help@att.com>
-Build-Depends: debhelper (>= 9), dh-yang, autoconf, automake, autotools-dev, cpio, libjson-perl,
+Section: net
+Priority: optional
+Maintainer: NuDanOS Maintainers <jon@fernandez.tech>
+Build-Depends: debhelper-compat (= 13),
+ dh-yang,
+ autoconf,
+ automake,
+ cpio,
+ libjson-perl,
  libgoogle-protocolbuffers-perl,
  libipc-system-simple-perl,
  libvyatta-cfgclient-perl,
  libvyatta-config-perl,
  libvci-perl,
  libtest-mockobject-perl,
- libvyatta-dataplane-proto-support (>= 3.12.6),
-Standards-Version: 3.9.6
+ libvyatta-dataplane-proto-support (>= 3.12.6)
+Standards-Version: 4.7.2
+Rules-Requires-Root: no
+Vcs-Git: https://github.com/nudanos/vyatta-cfg-bonding.git
+Vcs-Browser: https://github.com/nudanos/vyatta-cfg-bonding
 
 Package: vyatta-interfaces-bonding
 Architecture: all
@@ -38,7 +46,7 @@ Description: Vyatta interface link aggregation configuration
 
 Package: vyatta-interfaces-bonding-v1-yang
 Architecture: all
-Depends:
+Depends: 
  vyatta-interfaces-bonding (= ${binary:Version}),
  vyatta-interfaces-dataplane-v1-yang (>= 2.13),
  vyatta-update-vifs,
@@ -50,7 +58,7 @@ Description: Vyatta interface bonding (LAG) type Yang model version 1
 
 Package: vyatta-interfaces-bonding-qos-v1-yang
 Architecture: all
-Depends:
+Depends: 
  vplane-config-qos (>= 1.2.0),
  vyatta-cfg,
  ${yang:Depends},
@@ -60,7 +68,7 @@ Description: Yang module for bonding interface qos configuration
 
 Package: vyatta-interfaces-bonding-switch-v1-yang
 Architecture: all
-Depends:
+Depends: 
  ${yang:Depends},
  ${misc:Depends}
 Description: YANG module for bonding interface switch configuration
@@ -74,7 +82,7 @@ Description: vyatta-op-show-interfaces-bonding-v1 module
 
 Package: vyatta-interfaces-bonding-storm-control-v1-yang
 Architecture: all
-Depends:
+Depends: 
  ${yang:Depends},
  ${misc:Depends}
 Description: YANG module for bonding interface storm-control configuration
@@ -82,7 +90,7 @@ Description: YANG module for bonding interface storm-control configuration
 
 Package: vyatta-interfaces-bonding-deviation-broadcom-stratadnx-v1-yang
 Architecture: all
-Depends:
+Depends: 
  ${yang:Depends},
  ${misc:Depends}
 Description: Bonding interface YANG deviations for Broadcom StrataDNX platforms
