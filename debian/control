@@ -13,6 +13,7 @@ Build-Depends: debhelper-compat (= 13),
  libvyatta-cfgclient-perl,
  libvyatta-config-perl,
  libvyatta-interface-perl,
+ vyatta-system <!nocheck>,
  libvci-perl,
  libtest-mockobject-perl,
  libvyatta-dataplane-proto-support (>= 3.12.6)
