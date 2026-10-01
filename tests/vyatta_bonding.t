@@ -12,6 +12,10 @@ use warnings 'all';
 use Test::More 'no_plan';  # or use Test::More 'no_plan';
 
 use IPC::System::Simple;
+# Compile IPC::Run3 (used by Vyatta::Misc) before CORE::GLOBAL::system is
+# overridden below: its 'system { $prog } @args' form does not parse against
+# an ordinary sub.
+use IPC::Run3 ();
 
 use Test::MockObject;
 my $mock = Test::MockObject->new();
