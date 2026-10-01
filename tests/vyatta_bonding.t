@@ -12,26 +12,19 @@ use warnings 'all';
 use Test::More 'no_plan';  # or use Test::More 'no_plan';
 
 use IPC::System::Simple;
-# Compile IPC::Run3 (used by Vyatta::Misc) before CORE::GLOBAL::system is
-# overridden below: its 'system { $prog } @args' form does not parse against
-# an ordinary sub.
-use IPC::Run3 ();
 
 use Test::MockObject;
 my $mock = Test::MockObject->new();
 $mock->fake_module('vci');
+# add_member() only asks Vyatta::Interface whether the member is up. The real
+# module needs the system's interface type table (/opt/vyatta/etc/netdevice.d)
+# and vyatta-system's Vyatta::ioctl; the expected commands below are those of
+# a member that is down.
+$mock->fake_module('Vyatta::Interface',
+                   new => sub { return bless {}, 'MockInterface' });
+sub MockInterface::up { return 0 }
 
 use_ok('Vyatta::Bonding');
-
-# add_member() asks Vyatta::Interface whether the member is up. The type
-# table it needs for dp* names (/opt/vyatta/etc/netdevice.d, from
-# vplane-config) is not on a build host; the expected commands below are
-# those of a member that is down.
-{
-    no warnings 'redefine';
-    *Vyatta::Interface::new = sub { return bless {}, 'MockInterface' };
-    sub MockInterface::up { return 0 }
-}
 
 our $current_cmd = sub { diag( explain( \@_ ) ); return 0; };
 
