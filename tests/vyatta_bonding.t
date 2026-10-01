@@ -23,6 +23,16 @@ $mock->fake_module('vci');
 
 use_ok('Vyatta::Bonding');
 
+# add_member() asks Vyatta::Interface whether the member is up. The type
+# table it needs for dp* names (/opt/vyatta/etc/netdevice.d, from
+# vplane-config) is not on a build host; the expected commands below are
+# those of a member that is down.
+{
+    no warnings 'redefine';
+    *Vyatta::Interface::new = sub { return bless {}, 'MockInterface' };
+    sub MockInterface::up { return 0 }
+}
+
 our $current_cmd = sub { diag( explain( \@_ ) ); return 0; };
 
 sub mock_helper {
