@@ -29,7 +29,7 @@ Depends: ${misc:Depends},
  python3,
  libvci-perl,
  libvyatta-cfgclient-perl,
- vplane-config (>> 2.19),
+ vplane-config (>> 2.19) | vyatta-kernel-forwarding,
  vyatta-cfg (>= 0.105.3),
  vyatta-interfaces (>= 0.5),
  vyatta-forwarding,
@@ -39,7 +39,7 @@ Depends: ${misc:Depends},
  libipc-system-simple-perl,
  libvyatta-dataplane-proto-support (>= 3.10.55),
  libvyatta-interface-perl (>= 1.44),
- libvyatta-config-perl,
+ libvyatta-config-perl
 Description: Vyatta interface link aggregation configuration
  Vyatta interface link aggregation configuration utilities, templates and
  scripts.
